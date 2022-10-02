@@ -513,7 +513,7 @@ class GdalConan(ConanFile):
             cmake.definitions["GDAL_USE_JPEG"] = True
             cmake.definitions["GDAL_CONAN_PACKAGE_FOR_JPEG"] = self.options.with_jpeg
             cmake.definitions["TARGET_FOR_JPEG"] = \
-                    "JPEG::JPEG" if self.options.with_jpeg == "libjpeg" else "libjpeg-turbo::libjpeg-turbo"
+                    "JPEG::JPEG" if self.options.with_jpeg == "libjpeg" else "libjpeg-turbo::jpeg-static"
         else:
             cmake.definitions["JPEG_FOUND"] = False
 
@@ -808,7 +808,7 @@ class GdalConan(ConanFile):
         if self.options.with_jpeg == "libjpeg":
             self.cpp_info.requires.extend(['libjpeg::libjpeg'])
         elif self.options.with_jpeg == "libjpeg-turbo":
-            self.cpp_info.requires.extend(['libjpeg-turbo::jpeg'])
+            self.cpp_info.requires.extend(['libjpeg-turbo::libjpeg-turbo'])
 
         if self.options.with_libkml:
             self.cpp_info.requires.extend(['libkml::kmldom', 'libkml::kmlengine'])
